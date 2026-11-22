@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>本草集 · 中药材辨别学习站</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <h1 class="site-title">🌿 本草集</h1>
+      <p class="site-sub">常用中药材辨别 · 学习小站</p>
+      <nav class="site-nav">
+        <button class="nav-btn active" data-view="home">药材百科</button>
+        <button class="nav-btn" data-view="quiz">辨别测验</button>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- 首页：药材百科 -->
+    <section id="view-home" class="view">
+      <div class="toolbar">
+        <input id="search-input" type="search" placeholder="搜索药材名称 / 拼音 / 功效…" />
+        <span id="count-info" class="count-info"></span>
+      </div>
+      <div id="herb-grid" class="herb-grid"></div>
+    </section>
+
+    <!-- 测验页 -->
+    <section id="view-quiz" class="view hidden">
+      <!-- 开始前说明 -->
+      <div id="quiz-start" class="quiz-panel">
+        <h2>🌿 药材辨别小测验</h2>
+        <p class="quiz-desc">看看你能认出多少味药材！</p>
+        <ol class="quiz-rules">
+          <li>看图识药：根据药材图片，选择它的<b>名称</b></li>
+          <li>再选药性：判断这味药的<b>药性（四气）</b></li>
+          <li>两道都答对，这题才算过关，最后汇总成绩</li>
+        </ol>
+        <div class="quiz-count-row">
+          <label for="quiz-count">本题数量：</label>
+          <select id="quiz-count">
+            <option value="5">5 题（热身）</option>
+            <option value="10" selected>10 题（标准）</option>
+            <option value="15">15 题（加强）</option>
+            <option value="20">20 题（进阶）</option>
+            <option value="30">30 题（挑战全部 30 味）</option>
+          </select>
+        </div>
+        <button id="quiz-start-btn" class="btn btn-primary">开始答题</button>
+      </div>
+
+      <!-- 答题中 -->
+      <div id="quiz-run" class="quiz-panel hidden">
+        <div class="quiz-progress">
+          <span id="q-progress">第 1 / 10 题</span>
+          <div class="progress-bar"><div id="q-bar" class="progress-fill"></div></div>
+        </div>
+        <h2 id="q-stage" class="q-stage">第一步 · 这是什么药材？</h2>
+        <div id="q-img" class="q-img"></div>
+        <div id="q-options" class="q-options"></div>
+        <div id="q-feedback" class="q-feedback"></div>
+        <button id="q-next" class="btn btn-primary hidden">下一题 →</button>
+      </div>
+
+      <!-- 结果 -->
+      <div id="quiz-result" class="quiz-panel hidden">
+        <h2>📊 测验结果</h2>
+        <div class="result-score">
+          <div id="r-score" class="r-score">0 / 0</div>
+          <div id="r-message" class="r-message"></div>
+        </div>
+        <h3 class="review-title">答题回顾</h3>
+        <div id="r-list" class="r-list"></div>
+        <div class="result-actions">
+          <button id="r-again" class="btn btn-primary">再练一次</button>
+          <button id="r-home" class="btn">返回百科</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- 详情弹窗 -->
+  <div id="detail-modal" class="modal hidden">
+    <div class="modal-card">
+      <button id="modal-close" class="modal-close" title="关闭">✕</button>
+      <div id="modal-content"></div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <p>🌿 本网站为课程作业作品，药材信息仅供学习参考，不构成医疗建议。</p>
+    <p>用药请遵医嘱｜图片可自行替换 images 文件夹中的文件</p>
+  </footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,198 @@
+/* ============================================================
+   本草集 · 样式表（浅米色 + 墨绿 + 朱砂红 的中药风格）
+   ============================================================ */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg: #f7f3ea;
+  --card: #ffffff;
+  --ink: #3d3a34;
+  --green: #3f5d45;
+  --green-dark: #2c4231;
+  --accent: #b4593a;
+  --gold: #c9a227;
+  --line: #e6dfce;
+}
+
+body {
+  font-family: "PingFang SC", "Microsoft YaHei", "Noto Sans SC", sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.6;
+}
+
+/* ---------- 顶部 ---------- */
+.site-header {
+  background: linear-gradient(135deg, var(--green-dark), var(--green));
+  color: #fdf8ec;
+  padding: 26px 16px 0;
+  border-bottom: 4px solid var(--gold);
+}
+.header-inner { max-width: 980px; margin: 0 auto; }
+.site-title { font-size: 30px; letter-spacing: 4px; }
+.site-sub { font-size: 14px; opacity: 0.85; margin: 4px 0 14px; letter-spacing: 2px; }
+
+.site-nav { display: flex; gap: 8px; }
+.nav-btn {
+  border: none; background: transparent; color: #fdf8ec;
+  font-size: 15px; padding: 10px 20px; cursor: pointer;
+  border-radius: 10px 10px 0 0; opacity: 0.75;
+}
+.nav-btn:hover { opacity: 1; background: rgba(255,255,255,0.12); }
+.nav-btn.active { opacity: 1; background: var(--bg); color: var(--green-dark); }
+
+main { max-width: 980px; margin: 20px auto 0; padding: 0 16px 40px; }
+.hidden { display: none !important; }
+
+/* ---------- 首页工具栏 ---------- */
+.toolbar {
+  display: flex; align-items: center; gap: 12px; margin-bottom: 18px;
+}
+#search-input {
+  flex: 1; padding: 10px 14px; font-size: 15px;
+  border: 1px solid var(--line); border-radius: 10px; background: #fff;
+}
+#search-input:focus { outline: 2px solid var(--green); outline-offset: -1px; }
+.count-info { color: #8a8578; font-size: 13px; white-space: nowrap; }
+
+/* ---------- 药材卡片 ---------- */
+.herb-grid {
+  display: grid; gap: 16px;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+}
+.herb-card {
+  background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+  overflow: hidden; cursor: pointer; transition: transform .15s ease, box-shadow .15s ease;
+}
+.herb-card:hover { transform: translateY(-4px); box-shadow: 0 8px 20px rgba(60,50,30,.15); }
+.herb-card .pic-box { width: 100%; aspect-ratio: 4 / 3; background: #efe9da; overflow: hidden; }
+.herb-card img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.herb-card .card-body { padding: 12px 14px 14px; }
+.herb-card h3 { font-size: 17px; }
+.herb-card .pinyin { color: #8a8578; font-size: 12px; margin: 2px 0 8px; }
+.tags { display: flex; gap: 6px; flex-wrap: wrap; }
+.tag {
+  font-size: 12px; padding: 2px 10px; border-radius: 999px;
+  background: #f0ead9; color: #6d6d60;
+}
+.tag.qi { background: #fdeee6; color: #b4593a; }
+
+/* 空结果 */
+.empty-tip { grid-column: 1 / -1; text-align: center; color: #8a8578; padding: 40px 0; }
+
+/* ---------- 按钮 ---------- */
+.btn {
+  border: 1px solid var(--line); background: #fff; color: var(--ink);
+  padding: 10px 22px; font-size: 15px; border-radius: 10px; cursor: pointer;
+  transition: transform .1s ease, background .15s ease;
+}
+.btn:hover { background: #faf6ec; }
+.btn:active { transform: scale(.97); }
+.btn-primary { background: var(--green); border-color: var(--green); color: #fff; }
+.btn-primary:hover { background: var(--green-dark); }
+
+/* ---------- 测验 ---------- */
+.quiz-panel {
+  background: var(--card); border: 1px solid var(--line);
+  border-radius: 16px; padding: 28px 26px; max-width: 640px; margin: 0 auto;
+}
+.quiz-panel h2 { font-size: 22px; margin-bottom: 6px; }
+.quiz-desc { color: #8a8578; margin-bottom: 12px; }
+.quiz-rules { margin: 10px 0 18px 22px; }
+.quiz-rules li { margin: 6px 0; }
+.quiz-count-row { margin: 16px 0; font-size: 15px; }
+#quiz-count {
+  padding: 6px 10px; border-radius: 8px; border: 1px solid var(--line); font-size: 15px;
+}
+
+/* 进度条 */
+.quiz-progress { margin-bottom: 18px; font-size: 14px; color: #6d6d60; }
+.progress-bar {
+  height: 8px; background: #ece5d3; border-radius: 999px; margin-top: 8px; overflow: hidden;
+}
+.progress-fill {
+  height: 100%; width: 0; background: linear-gradient(90deg, var(--gold), var(--accent));
+  border-radius: 999px; transition: width .35s ease;
+}
+
+.q-stage { font-size: 19px; text-align: center; margin-bottom: 16px; color: var(--green-dark); }
+.q-img { text-align: center; margin-bottom: 18px; }
+.q-img img {
+  max-width: 320px; width: 100%; border-radius: 14px;
+  border: 1px solid var(--line); box-shadow: 0 4px 14px rgba(60,50,30,.12);
+}
+.q-options { display: grid; gap: 10px; }
+.q-option {
+  padding: 12px 16px; font-size: 16px; text-align: left; cursor: pointer;
+  border: 1px solid var(--line); border-radius: 10px; background: #fff;
+  transition: background .12s ease, border-color .12s ease;
+}
+.q-option:hover:not(:disabled) { background: #f6f0e0; border-color: var(--gold); }
+.q-option.correct { background: #e2f0e3; border-color: #5f9d63; color: #2c5e30; }
+.q-option.wrong { background: #f6ded8; border-color: #c96b52; color: #96391f; }
+.q-option:disabled { cursor: default; }
+
+.q-feedback { text-align: center; margin: 14px 0; font-size: 16px; min-height: 24px; }
+.q-feedback.ok { color: #2c5e30; }
+.q-feedback.bad { color: #96391f; }
+#q-next { display: block; margin: 0 auto; }
+
+/* 结果 */
+.result-score { text-align: center; margin: 18px 0; }
+.r-score { font-size: 40px; font-weight: bold; color: var(--accent); }
+.r-message { font-size: 16px; color: #6d6d60; margin-top: 6px; }
+.review-title { margin: 6px 0 12px; font-size: 16px; }
+.r-list { display: grid; gap: 10px; }
+.r-card {
+  display: flex; align-items: center; gap: 12px;
+  border: 1px solid var(--line); border-radius: 12px; padding: 10px 14px; background: #fdfbf4;
+}
+.r-card img { width: 52px; height: 52px; border-radius: 10px; object-fit: cover; }
+.r-card .r-name { font-weight: bold; }
+.r-card .r-detail { font-size: 13px; color: #6d6d60; }
+.r-card .mark { font-weight: bold; margin-left: 6px; }
+.mark.good { color: #2c5e30; }
+.mark.bad { color: #96391f; }
+.result-actions { display: flex; gap: 10px; justify-content: center; margin-top: 22px; }
+
+/* ---------- 详情弹窗 ---------- */
+.modal {
+  position: fixed; inset: 0; background: rgba(40, 35, 25, 0.55);
+  display: flex; align-items: center; justify-content: center; padding: 20px; z-index: 50;
+}
+.modal-card {
+  position: relative; background: #fff; border-radius: 16px;
+  max-width: 720px; width: 100%; max-height: 88vh; overflow-y: auto; padding: 26px;
+}
+.modal-close {
+  position: absolute; top: 12px; right: 14px; width: 34px; height: 34px;
+  border: none; border-radius: 50%; background: #f0ead9; cursor: pointer;
+  font-size: 15px; color: var(--ink);
+}
+.modal-close:hover { background: #e2d8bf; }
+.detail-top { display: flex; gap: 18px; margin-bottom: 16px; }
+.detail-top img {
+  width: 160px; height: 160px; border-radius: 14px; object-fit: cover;
+  border: 1px solid var(--line); flex-shrink: 0;
+}
+.detail-name { font-size: 24px; }
+.detail-pinyin { font-size: 14px; color: #8a8578; font-weight: normal; margin-left: 8px; }
+.detail-meta { margin: 8px 0; font-size: 14px; }
+.detail-meta .meta-label { color: var(--accent); font-weight: bold; margin-right: 6px; }
+.detail-section { margin-top: 12px; font-size: 15px; }
+.detail-section h4 { color: var(--green-dark); margin-bottom: 4px; font-size: 15px; }
+.detail-note { background: #fdf3ec; border-left: 4px solid var(--accent); padding: 10px 14px; border-radius: 0 8px 8px 0; margin-top: 14px; }
+.disclaimer { margin-top: 14px; font-size: 12px; color: #a39b8a; text-align: center; }
+
+/* ---------- 页脚 ---------- */
+.site-footer {
+  text-align: center; color: #a39b8a; font-size: 13px;
+  padding: 26px 16px 34px; border-top: 1px solid var(--line);
+}
+
+/* ---------- 小屏适配 ---------- */
+@media (max-width: 540px) {
+  .detail-top { flex-direction: column; align-items: center; text-align: center; }
+  .site-title { font-size: 24px; }
+  .herb-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+}
