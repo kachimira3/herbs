@@ -61,15 +61,24 @@ function placeholderSrc(name) {
   return "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg);
 }
 
-// 根据药材生成 <img>，自动寻找可用图片，失败则用占位图
+// 根据药材生成 <img>，优先用缩略图（快），失败再试原图，最后用占位图
 function makeImg(herb, cls) {
   var img = document.createElement("img");
   img.alt = herb.name;
+  img.loading = "lazy";        // 懒加载：滚到才加载，省流量
+  img.decoding = "async";      // 异步解码：不阻塞页面
   if (cls) img.className = cls;
+
+  // 候选路径：先缩略图，再原图各种格式
+  var sources = ["images/thumbs/" + herb.id + ".jpg"];
+  IMG_EXTS.forEach(function (ext) {
+    sources.push("images/" + herb.id + "." + ext);
+  });
+
   var tried = 0;
   function tryNext() {
-    if (tried < IMG_EXTS.length) {
-      img.src = "images/" + herb.id + "." + IMG_EXTS[tried];
+    if (tried < sources.length) {
+      img.src = sources[tried];
       tried++;
     } else {
       img.src = placeholderSrc(herb.name);
